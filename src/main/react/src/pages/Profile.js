@@ -394,7 +394,7 @@ const Profile = () => {
             <li key={friend.memberId} className="friend-item">
               <div className="friend-info">
                 <img
-                  src={friend.profilePictureUrl || imgLogo2}
+                  src={friend.profileImg || imgLogo2}
                   alt="친구 이미지"
                   className="friend-image"
                 />

@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -207,7 +208,7 @@ public class FeedService {
                             .mediaUrl(feed.getMediaUrl())
                             .comments(commentsWithReplies)
                             .isRepost(feed.isRepost())
-                            .profilePictureUrl(memberService.getMemberProfile(feed.getMemberId()).getProfilePictureUrl())
+                            .profileImg(memberService.getMemberProfile(feed.getMemberId()).getProfileImg())
                             .authorName(memberService.getMemberProfile(feed.getMemberId()).getName())
                             .liked(feedLikeRepository.existsByFeed_FeedIdAndMemberId(feed.getFeedId(), memberId))
                             .build();
@@ -237,7 +238,7 @@ public class FeedService {
         }
 
         MemberResponseDto memberResponse = memberService.getMemberProfile(feed.getMemberId());
-        String profilePictureUrl = memberResponse.getProfilePictureUrl();
+        String profileImg = memberResponse.getProfileImg();
         String authorName = memberResponse.getName();
 
         boolean liked = currentMemberId != null &&
@@ -260,7 +261,7 @@ public class FeedService {
                 .reposterId(feed.getReposterId())
                 .repostCreatedAt(feed.getRepostCreatedAt())
                 .mediaUrl(feed.getMediaUrl())
-                .profilePictureUrl(profilePictureUrl)
+                .profileImg(profileImg)
                 .originalPoster(originalPoster) // Original poster info if repost
                 .authorName(authorName)
                 .comments(commentsWithReplies)
@@ -284,9 +285,9 @@ public class FeedService {
      */
     private CommentResponseDto mapCommentWithReplies(FeedComment comment, Integer currentMemberId) {
         // 작성자 프로필 사진 및 이름 조회 (기본값 제공)
-        String profilePictureUrl = memberService.getMemberProfile(comment.getMemberId()).getProfilePictureUrl();
-        if (profilePictureUrl == null || profilePictureUrl.isEmpty()) {
-            profilePictureUrl = "https://example.com/default-profile-picture.jpg";
+        String profileImg = memberService.getMemberProfile(comment.getMemberId()).getProfileImg();
+        if (profileImg == null || profileImg.isEmpty()) {
+            profileImg = "https://example.com/default-profile-picture.jpg";
         }
         String memberName = memberService.getMemberProfile(comment.getMemberId()).getName();
 
@@ -309,7 +310,7 @@ public class FeedService {
                 .comment(comment.getComment())
                 .createdAt(comment.getCreatedAt())
                 .updatedAt(comment.getUpdatedAt())
-                .profilePictureUrl(profilePictureUrl)
+                .profileImg(profileImg)
                 .replies(replies)
                 .likesCount(likesCount)
                 .liked(liked)
@@ -328,7 +329,7 @@ public class FeedService {
             return MemberInfoDto.builder()
                     .memberId(memberResponse.getMemberId())
                     .name(memberResponse.getName())
-                    .profilePictureUrl(memberResponse.getProfilePictureUrl())
+                    .profileImg(memberResponse.getProfileImg())
                     .build();
         } catch (EntityNotFoundException e) {
             return null;
@@ -366,5 +367,27 @@ public class FeedService {
                 .orElseThrow(() -> new IllegalArgumentException("피드를 찾을 수 없습니다. ID: " + feedId));
         feed.setLikesCount(feed.getLikesCount() - 1);
         feedRepository.save(feed);
+    }
+
+    /**
+     * 특정 사용자의 피드 조회
+     *
+     * @param memberId          회원 ID
+     * @return 해당 피드를 FeedResponseDto로 반환
+     */
+    @Transactional(readOnly = true)
+    public List<FeedResponseDto> getFeedByMemberId(Integer memberId) {
+        List<Feed> feeds = feedRepository.findByMemberId(memberId);
+
+        if (feeds.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        return feeds.stream()
+                .map(this::mapToResponseDto) // currentMemberId 제거
+                .collect(Collectors.toList());
+    }
+    private FeedResponseDto mapToResponseDto(Feed feed) {
+        return mapToResponseDto(feed, null); // currentMemberId를 null로 전달
     }
 }

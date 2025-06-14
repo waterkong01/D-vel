@@ -8,7 +8,8 @@ import com.capstone.project.kedu.entity.edu.MyAcademyEntity2;
 import com.capstone.project.kedu.entity.edu.MyCourseEntity2;
 import com.capstone.project.kedu.entity.mypage.SkillHubEntity2;
 import com.capstone.project.kedu.entity.survey.SurveyEntity2;
-import com.capstone.project.myPage.entity.Profile;
+import com.capstone.project.myPage.entity.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -45,6 +46,9 @@ public class Member {
     @Column(nullable = false, length = 50)
     private String name; // 사용자 이름
 
+    @Column(name = "nick_name")
+    private String nickName; // 닉네임
+
     @Column(name = "phone_number", unique = true, length = 15)
     private String phoneNumber; // 전화번호
 
@@ -79,8 +83,8 @@ public class Member {
     @Builder.Default
     private LocalDateTime updatedAt = LocalDateTime.now(); // 마지막 수정 시간
 
-    @Column(name = "profile_picture_url", length = 255)
-    private String profilePictureUrl; // 프로필 사진 URL
+    @Column(name = "profile_img")
+    private String profileImg; // 프로필 사진 URL
 
     // 연관 엔티티 매핑
 
@@ -173,7 +177,7 @@ public class Member {
      * @param showCompany        회사 공개 여부
      * @param provider           OAuth 제공자
      * @param providerId         OAuth 제공자로부터 받은 고유 ID
-     * @param profilePictureUrl  프로필 사진 URL
+     * @param profileImg  프로필 사진 URL
      */
     @Builder
     public Member(
@@ -186,7 +190,7 @@ public class Member {
             Boolean showCompany,
             String provider,
             String providerId,
-            String profilePictureUrl
+            String profileImg
     ) {
         this.email = email;
         this.password = password;
@@ -197,7 +201,7 @@ public class Member {
         this.showCompany = showCompany != null ? showCompany : false;
         this.provider = provider;
         this.providerId = providerId;
-        this.profilePictureUrl = profilePictureUrl;
+        this.profileImg = profileImg;
         this.registeredAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
         this.friends = new ArrayList<>();
@@ -229,5 +233,20 @@ public class Member {
     @PreUpdate
     protected void onUpdate() {
         this.updatedAt = LocalDateTime.now();
+    }
+
+
+
+    @OneToOne(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Mypage mypage;
+
+    // Profile의 profileId를 가져오는 메소드
+    public Integer getMypageId() {
+        return (mypage != null) ? mypage.getMypageId() : null;  // profile이 null일 경우 null을 반환
+    }
+
+    // Member의 memberId를 가져오는 메소드
+    public Integer getId() {
+        return (this.id != null) ? this.id : null;  // memberId가 null이 아니면 반환
     }
 }

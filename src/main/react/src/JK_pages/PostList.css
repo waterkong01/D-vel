@@ -1,0 +1,137 @@
+/* 전체 컨테이너 */
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  text-align: center;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 헤더 스타일 */
+.header {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #333;
+  text-align: center;
+}
+
+/* 새 게시글 작성 버튼 */
+.newPostButton {
+  padding: 14px 24px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 30px;
+  font-size: 18px;
+  transition: background-color 0.3s;
+}
+
+.newPostButton:hover {
+  background-color: #0056b3;
+}
+
+/* 게시글 리스트 스타일 */
+.postList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column; /* 세로로 한 줄씩 배치 */
+  gap: 20px; /* 각 게시글 간 간격 */
+}
+
+/* 게시글 항목 스타일 */
+.postItem {
+  display: flex; /* Flexbox를 사용하여 가로로 배치 */
+  justify-content: flex-start; /* 왼쪽 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #e0e0e0;
+  height: auto; /* 고정 높이 제거 */
+  text-align: left;
+}
+
+/* 호버 시 효과 */
+.postItem:hover {
+  transform: translateY(-5px); /* 마우스를 올렸을 때 살짝 위로 */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.postNumberContainer {
+  flex: 0 0 60px; /* 고정된 크기 */
+  text-align: left;
+  margin-right: 20px; /* 제목과 다른 내용 간격 */
+}
+
+.postNumber {
+  font-size: 18px;
+  font-weight: bold;
+  color: #007bff;
+  white-space: nowrap; /* 글번호가 한 줄로만 표시되도록 설정 */
+  overflow: hidden; /* 넘치는 글번호 숨김 처리 */
+  text-overflow: ellipsis; /* 넘치는 글번호는 "..."으로 처리 */
+}
+/* 게시글 제목 스타일 */
+.postTitle {
+  font-size: 22px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+  margin-right: 20px; /* 제목과 다른 요소 간격 */
+  text-align: left;
+  white-space: nowrap; /* 텍스트가 한 줄로만 표시되도록 설정 */
+  overflow: hidden; /* 넘치는 텍스트는 숨김 처리 */
+  text-overflow: ellipsis; /* 넘치는 텍스트는 "..."으로 처리 */
+  max-width: 600px; /* 댓글/좋아요 수를 포함한 오른쪽 영역을 제외한 공간만 사용 */
+}
+
+/* 댓글 수 스타일 */
+.commentCount {
+  font-size: 14px;
+  color: #007bff;
+  margin-top: 5px;
+  text-align: left;
+}
+
+/* 구분선 스타일 */
+.divider {
+  margin-top: 10px;
+  border-top: 1px solid #ddd;
+}
+
+/* 전체 게시글 수 표시 */
+.totalPosts {
+  font-size: 18px;
+  color: #555;
+  margin-top: 20px;
+}
+
+/* 댓글과 좋아요 수를 오른쪽에 배치하는 스타일 */
+.interactionCounts {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px; /* 댓글 수와 좋아요 수 간격 */
+  margin-top: 5px; /* 댓글/좋아요 수와 제목 간격 */
+}
+
+.viewCount,
+.commentCount,
+.likeCount,
+.authorName,
+.postDate {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6; /* line-height 설정으로 텍스트가 일관되게 보이도록 */
+}

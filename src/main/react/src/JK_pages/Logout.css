@@ -1,0 +1,28 @@
+/* 네비바 스타일 */
+.navbar {
+  background-color: transparent; /* 네비바를 투명하게 설정 */
+  display: flex;
+  justify-content: flex-end; /* 오른쪽 정렬 */
+  padding: 10px 20px;
+  position: fixed; /* 화면 상단에 고정 */
+  top: 0; /* 상단에 위치 */
+  right: 0; /* 오른쪽 정렬 */
+  width: 100%; /* 네비바 너비 100% */
+  z-index: 1000; /* 네비바가 다른 요소들 위에 오도록 설정 */
+}
+
+/* 로그아웃 버튼 스타일 */
+.logout-button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #cc0000;
+}

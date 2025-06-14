@@ -1,0 +1,429 @@
+/* 뒤로 가기 버튼 */
+.backButton {
+  display: block;
+  padding: 10px 15px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+/* 전체 컨테이너 */
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+  margin-top: 4px; /* 네비바 높이에 맞춰 아래 콘텐츠가 가려지지 않도록 패딩 추가 */
+}
+
+/* 게시글 컨테이너 */
+.postContainer {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  text-align: left;
+}
+/* 게시글 메타 */
+.postMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+.postMetaLeft,
+.postMetaRight {
+  display: flex;
+  gap: 20px;
+}
+
+.postId,
+.postDate,
+.viewsContainer,
+.commentCount {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+}
+/* 게시글 메타 */
+.postMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6; /* 텍스트 간격을 맞춰줌 */
+}
+
+.postMetaLeft,
+.postMetaRight {
+  display: flex;
+  gap: 20px;
+  align-items: center; /* 세로 정렬을 맞춰줌 */
+}
+
+.postId,
+.postDate,
+.viewsContainer,
+.commentCount {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6; /* line-height 설정으로 텍스트가 일관되게 보이도록 */
+}
+/* 게시글 메타 */
+.postMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+/* 좌측 메타 (글번호, 날짜 등) */
+.postMetaLeft {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+/* 우측 메타 (조회수, 댓글수 등) */
+.postMetaRight {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+/* 글번호 */
+.postId {
+  margin: 0;
+  font-size: 14px; /* 글자 크기 통일 */
+  color: #555;
+  line-height: 1.6;
+  vertical-align: middle; /* 수직 정렬 */
+}
+
+/* 게시글 날짜 */
+.postDate {
+  margin: 0;
+  font-size: 14px; /* 글자 크기 통일 */
+  color: #555;
+  line-height: 1.6;
+  vertical-align: middle; /* 수직 정렬 */
+  display: inline-block;
+  transform: translateY(-5px); /* 위로 2px 올리기 */
+}
+
+/* 조회수 */
+.viewsContainer,
+.commentCount {
+  margin: 0;
+  font-size: 14px; /* 글자 크기 통일 */
+  color: #555;
+  line-height: 1.6;
+}
+
+/* 제목과 작성자 정보가 같은 줄에 배치되도록 수정 */
+.titleAndAuthor {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* 세로 정렬을 맞춰줌 */
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.authorInfo {
+  font-size: 14px;
+  color: #555;
+  margin-left: 20px; /* 제목과의 간격을 조정 */
+}
+
+/* 내용 */
+.content {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* 게시글 작성 날짜 */
+.postDate {
+  font-size: 14px;
+  color: gray;
+  margin-top: 10px;
+}
+/* 좋아요 컨테이너 */
+.likesContainer {
+  display: flex;
+  flex-direction: column; /* 텍스트는 세로로 정렬 */
+  align-items: center; /* 텍스트는 가로로 가운데 정렬 */
+  margin-top: 20px;
+}
+
+/* 좋아요 텍스트 */
+.likesText {
+  margin-bottom: 10px; /* 버튼과 텍스트 사이 간격 */
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* 버튼들을 같은 줄에 배치 */
+.likesButtons {
+  display: flex; /* 버튼을 가로로 정렬 */
+  justify-content: center; /* 버튼들을 가로로 가운데 정렬 */
+  gap: 10px; /* 버튼 사이에 간격을 추가 */
+}
+
+/* 좋아요 버튼 */
+.likeButton {
+  padding: 5px 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* 좋아요 취소 버튼 */
+.unlikeButton {
+  padding: 5px 10px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* 코드 블록 컨테이너 */
+.codeContainer {
+  margin-top: 20px;
+}
+
+/* 코드 블록 */
+.codeBlock {
+  background-color: #272822;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+/* 코드 스타일 */
+.code {
+  font-family: monospace;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* 수정하기 버튼 */
+.editButton {
+  margin-top: 20px;
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+}
+
+/* 삭제하기 버튼 */
+.deleteButton {
+  margin-top: 20px;
+  padding: 10px 15px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+}
+
+/* 댓글 섹션 */
+.commentSection {
+  margin-top: 30px;
+  text-align: left;
+}
+
+/* 댓글 리스트 */
+.commentList {
+  list-style: none;
+  padding: 0;
+}
+
+/* 댓글 아이템 */
+.commentItem {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* 댓글 날짜 */
+.commentDate {
+  font-size: 0.9em;
+  color: gray;
+}
+
+/* 댓글이 없을 때 */
+.noComment {
+  padding: 10px;
+  text-align: center;
+  color: gray;
+}
+
+/* 댓글 입력창 */
+.commentInput {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  resize: none;
+  box-sizing: border-box;
+}
+
+/* 댓글 작성 버튼 */
+.commentButton {
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+}
+
+/* 로딩 상태 */
+.loading {
+  text-align: center;
+  font-size: 18px;
+  margin-top: 50px;
+}
+
+/* 댓글 수정 및 삭제 버튼 스타일 */
+.commentActions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* 댓글 수정 버튼 */
+.editCommentButton {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* 댓글 삭제 버튼 */
+.deleteCommentButton {
+  padding: 5px 10px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* 댓글 대댓글 버튼 스타일 */
+.replyCommentButton {
+  padding: 5px 10px;
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+/* 대댓글 입력 폼 */
+.replyForm {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+/* 대댓글 작성 입력창 */
+.replyInput {
+  width: 100%;
+  height: 80px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  resize: none;
+  box-sizing: border-box;
+}
+
+/* 대댓글 작성 버튼 */
+.replyButton {
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+}
+
+/* 대댓글 리스트 */
+.replyList {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+/* 대댓글 아이템 */
+.replyItem {
+  padding: 10px;
+  border-left: 2px solid #28a745;
+  margin-left: 20px;
+}
+
+/* 대댓글 날짜 */
+.replyDate {
+  font-size: 0.9em;
+  color: gray;
+}
+
+/* 대댓글 수정 및 삭제 버튼 스타일 */
+.replyActions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* 대댓글 수정 버튼 */
+.editReplyButton {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* 대댓글 삭제 버튼 */
+.deleteReplyButton {
+  padding: 5px 10px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
