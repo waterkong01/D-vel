@@ -4,19 +4,19 @@ import styled from "styled-components";
  * 🔹 전체 레이아웃 컨테이너
  */
 export const LayoutContainer = styled.div`
-  margin-top: 70px;
+  //margin-top: 70px;
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 1fr; /* 단일 컬럼 레이아웃 */
+  place-items: center; /* 자식 요소를 중앙 정렬 */
   gap: 20px;
-  padding: 20px;
-  background-color: #f5f6f7;
-  min-height: 100vh;
+  //padding: 20px;
+  //min-height: 100vh;
   font-family: Arial, sans-serif;
+  background-color: transparent;
 
-  /* For screens below 768px, switch to a single-column layout */
+  /* 작은 화면에서도 단일 컬럼 유지 */
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
-    /* You can also reduce padding, etc., as needed */
   }
 `;
 
@@ -33,6 +33,7 @@ export const Section = styled.div`
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: transparent;
 
   /* Slightly reduce padding and font sizes on tablets */
   @media (max-width: 1200px) and (min-width: 769px) {
@@ -43,6 +44,7 @@ export const Section = styled.div`
 
 /** 🔹 프로필 섹션 */
 export const ProfileSection = styled(Section)`
+  background-color: transparent;
   text-align: center;
 
   @media (max-width: 768px) {
@@ -56,6 +58,7 @@ export const ProfileImage = styled.img`
   height: 150px;
   border-radius: 50%;
   margin-bottom: 15px;
+  background-color: transparent;
 
   /* Slightly shrink on tablet */
   @media (max-width: 1200px) and (min-width: 769px) {
@@ -66,10 +69,14 @@ export const ProfileImage = styled.img`
 
 /** 🔹 피드 컨테이너 */
 export const FeedContainer = styled.div`
-  background: white;
+  background-color: #ffffff;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 5px 10px 10px 10px rgba(0, 0, 0, 0.1);
+  margin: 20px auto; /* 상하 20px 여백과 수평 중앙 정렬 */
+  width: 90%; /* 화면 너비의 90% 사용 */
+  min-width: 700px;
+  max-width: 800px; /* 최대 너비 설정 */
 
   /* On tablets, shrink padding a bit */
   @media (max-width: 1200px) and (min-width: 769px) {
@@ -83,9 +90,9 @@ export const CreateFeedContainer = styled.div`
   flex-direction: column;
   align-items: stretch;
   padding: 10px;
-  background: white;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
 
   textarea {
     width: 100%;
@@ -95,19 +102,20 @@ export const CreateFeedContainer = styled.div`
     resize: none;
     margin-bottom: 10px;
     box-sizing: border-box;
+    background-color: #fff;
   }
 
   button {
     width: 100%;
     padding: 10px;
-    background-color: #4caf50;
-    color: white;
+    background-color: #000; /* 검정 배경 */
+    color: #fff; /* 흰색 글씨 */
     border: none;
     border-radius: 5px;
     cursor: pointer;
 
     &:hover {
-      background-color: #45a049;
+      background-color: #333; /* hover 시 약간 밝은 회색 */
     }
   }
 `;
@@ -116,6 +124,7 @@ export const CreateFeedContainer = styled.div`
 export const TextareaContainer = styled.div`
   position: relative;
   width: 100%;
+  background-color: #fff;
 `;
 
 /** 🔹 이미지 업로드 버튼 레이블 */
@@ -125,6 +134,7 @@ export const UploadIconLabel = styled.label`
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
+  background-color: transparent;
 `;
 
 /** 🔹 이미지 업로드 아이콘 */
@@ -132,6 +142,7 @@ export const UploadIcon = styled.img`
   width: 30px;
   height: 30px;
   transition: transform 0.2s ease;
+  background-color: transparent;
 
   &:hover {
     transform: scale(1.1);
@@ -141,19 +152,21 @@ export const UploadIcon = styled.img`
 /** 🔹 게시글 목록 컨테이너 */
 export const PostList = styled.div`
   margin-top: 20px;
+  min-width: 70%;
   display: flex;
   flex-direction: column;
   gap: 15px;
+  background-color: transparent;
 `;
 
 /** 🔹 개별 게시글 스타일 */
 export const Post = styled.div`
-  background: white;
   padding: 15px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  background-color: transparent;
 `;
 
 /** 🔹 게시글 헤더 (작성자 정보 포함) */
@@ -161,6 +174,7 @@ export const PostHeader = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 15px;
+  background-color: #fff;
 `;
 
 /** 🔹 작성자 이미지 */
@@ -169,28 +183,39 @@ export const AuthorImage = styled.img`
   height: 40px;
   border-radius: 50%;
   margin-right: 10px;
+  background-color: transparent;
 `;
 
 /** 🔹 작성자 세부 정보 */
 export const AuthorDetails = styled.div`
   display: flex;
   flex-direction: column;
+  background-color: transparent;
+    & button {
+        background: #DBDBDB;
+        border: none;
+        padding: 0.8em 1em;
+        border-radius: 10px;
+    }
 `;
 
 /** 🔹 작성자 이름 */
 export const AuthorName = styled.span`
   font-weight: bold;
+  background-color: transparent;
 `;
 
 /** 🔹 작성자 역할 또는 회사 */
 export const AuthorRole = styled.span`
   color: #888;
+  background-color: transparent;
 `;
 
 /** 🔹 게시글 날짜 */
 export const PostDate = styled.span`
   font-size: 12px;
   color: #888;
+  background-color: transparent;
 `;
 
 /** 🔹 업로드된 이미지 스타일 */
@@ -202,6 +227,7 @@ export const UploadedImage = styled.img`
   height: auto;
   margin-top: 10px;
   border-radius: 8px;
+  background-color: transparent;
 `;
 
 /** 🔹 새로고침 버튼 스타일 */
@@ -227,6 +253,7 @@ export const RefreshIcon = styled.img`
   width: 30px;
   height: 30px;
   transition: transform 0.2s ease;
+  background-color: transparent;
 
   &.refreshing {
     transform: rotate(360deg);
@@ -235,6 +262,7 @@ export const RefreshIcon = styled.img`
 
 /** 🔹 친구 추천 섹션 */
 export const FriendsSection = styled(Section)`
+  background-color: transparent;
   @media (max-width: 768px) {
     display: none;
   }
@@ -250,6 +278,7 @@ export const FriendsSection = styled(Section)`
 export const FriendList = styled.ul`
   list-style: none;
   padding: 0;
+  background-color: transparent;
 `;
 
 /** 🔹 개별 친구 항목 스타일 */
@@ -262,12 +291,14 @@ export const FriendItem = styled.li`
   border-radius: 8px;
   background-color: #f9f9f9;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  background-color: transparent;
 `;
 
 /** 🔹 친구 정보 영역 */
 export const FriendInfo = styled.div`
   display: flex;
   align-items: center;
+  background-color: transparent;
 `;
 
 /** 🔹 친구 이미지 */
@@ -276,18 +307,21 @@ export const FriendImage = styled.img`
   height: 40px;
   border-radius: 50%;
   margin-right: 10px;
+  background-color: transparent;
 `;
 
 /** 🔹 친구 상세 정보 */
 export const FriendDetails = styled.div`
   display: flex;
   flex-direction: column;
+  background-color: #fff;
 `;
 
 /** 🔹 친구 역할 또는 회사 */
 export const FriendRole = styled.span`
   font-size: 12px;
   color: #888;
+  background-color: transparent;
 `;
 
 /** 🔹 친구 액션 버튼 영역 */
@@ -295,6 +329,7 @@ export const FriendActions = styled.div`
   display: flex;
   flex-direction: row;
   gap: 5px;
+  background-color: transparent;
 `;
 
 /** 🔹 친구 요청 버튼 */
@@ -306,6 +341,7 @@ export const FriendRequestButton = styled.button`
   padding: 5px 10px;
   font-size: 14px;
   cursor: pointer;
+  background-color: transparent;
 
   &:hover {
     background-color: #45a049;
@@ -358,6 +394,7 @@ export const PostActions = styled.div`
   display: flex;
   justify-content: space-around;
   margin-top: 10px;
+  background-color: #fff;
 `;
 
 /** 🔹 액션 버튼 (Like, Comment, Repost) */
@@ -380,11 +417,13 @@ export const ActionButton = styled.button`
 export const EditButton = styled(ActionButton)`
   padding: 5px;
   font-size: 12px;
+  background-color: transparent;
 `;
 
 /** 🔹 댓글 입력 영역 */
 export const CommentContainer = styled.div`
   margin-top: 10px;
+  background-color: #fff;
 `;
 
 /** 🔹 리포스트 입력 영역 */
@@ -393,6 +432,7 @@ export const RepostContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
+  background-color: #fff;
 `;
 
 /** 🔹 리포스트 입력 필드 */
@@ -401,13 +441,14 @@ export const RepostInput = styled.input`
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  background-color: transparent;
 `;
 
 /** 🔹 리포스트 제출 버튼 */
 export const RepostSubmitButton = styled.button`
   width: 120px;
   padding: 8px;
-  background-color: #0073b1;
+  background-color: #000;
   color: white;
   border: none;
   border-radius: 5px;
@@ -420,11 +461,11 @@ export const RepostSubmitButton = styled.button`
 
 /** 🔹 원본 게시글 컨테이너 (리포스트된 경우) - LinkedIn 스타일 미니 피드 */
 export const OriginalPostContainer = styled.div`
-  background: #f3f6f8; /* light background for the mini feed */
   border: 1px solid #d1d9e6; /* subtle border */
   border-radius: 8px;
   padding: 10px;
   margin: 10px 0;
+  background-color: #fff;
 `;
 
 /** 🔹 원본 게시글 헤더 */
@@ -433,6 +474,7 @@ export const OriginalPostHeader = styled.div`
   font-weight: bold;
   color: #0073b1;
   margin-bottom: 5px;
+  background-color: #fff;
 `;
 
 /** 🔹 원본 게시글 내용 */
@@ -440,12 +482,14 @@ export const OriginalPostContent = styled.div`
   font-size: 14px;
   color: #333;
   line-height: 1.4;
+  background-color: transparent;
 `;
 
 /** 🔹 댓글 입력 컨테이너 - 입력 필드와 제출 버튼 포함 */
 export const CommentInputContainer = styled.div`
   position: relative;
   width: 100%;
+  background-color: #fff;
 `;
 
 /** 🔹 댓글 입력 필드 */
@@ -454,6 +498,7 @@ export const CommentInput = styled.input`
   padding: 8px 40px 8px 8px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  background-color: #fff;
 `;
 
 /** 🔹 댓글 제출 아이콘 (입력 필드 내부 오른쪽 배치) */
@@ -476,6 +521,7 @@ export const ReplyContainer = styled.div`
   border-left: 2px solid #eee;
   padding-left: 10px;
   margin-top: 10px;
+  background-color: #fff;
 `;
 
 /** 🔹 댓글 카드 - 댓글을 감싸는 컨테이너 (반복적으로 사용) */
@@ -485,4 +531,5 @@ export const CommentCard = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
+  background-color: #fff;
 `;

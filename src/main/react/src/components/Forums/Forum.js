@@ -21,10 +21,10 @@ import {
 const Forum = () => {
   const navigate = useNavigate();
 
-  // KR: 페이지 로드시 body의 배경색을 설정
-  useEffect(() => {
-    document.body.style.backgroundColor = "#f5f6f7";
-  }, []);
+  // // KR: 페이지 로드시 body의 배경색을 설정
+  // useEffect(() => {
+  //   document.body.style.backgroundColor = "#f5f6f7";
+  // }, []);
 
   // KR: 현재 사용자 정보 상태 초기화
   const [memberId, setMemberId] = useState(null);
@@ -39,7 +39,7 @@ const Forum = () => {
         setMemberData({
           name: userInfo.name,
           currentCompany: userInfo.currentCompany,
-          profileImg: userInfo.profileImg,
+          profilePictureUrl: userInfo.profilePictureUrl,
         });
       } else {
         // KR: 로그인하지 않은 경우 토스트 경고 메시지를 출력한 후 2.5초 후에 로그인 페이지로 리디렉션

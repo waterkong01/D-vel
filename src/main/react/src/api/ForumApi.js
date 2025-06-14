@@ -1,4 +1,5 @@
 import AxiosInstance from "../axios/AxiosInstanse"; // Axios 인스턴스 불러오기
+import Common from "../utils/Common"; // Axios 인스턴스 불러오기
 
 /**
  * 포럼 관련 API 관리
@@ -185,19 +186,19 @@ const ForumApi = {
     }
   },
 
-  /**
-   * 게시글 상세 정보 가져오기
-   * @param {number} postId - 게시글 ID
-   * @returns {Promise<Object>} 게시글 상세 데이터 반환
-   */ getPostById: async (postId) => {
-    try {
-      const response = await AxiosInstance.get(`/api/forums/posts/${postId}`);
-      return response.data; // 서버 응답 데이터 반환
-    } catch (error) {
-      console.error("게시글 데이터 가져오기 중 오류 발생:", error);
-      throw error; // 오류 전달
-    }
-  },
+  // /**
+  //  * 게시글 상세 정보 가져오기
+  //  * @param {number} postId - 게시글 ID
+  //  * @returns {Promise<Object>} 게시글 상세 데이터 반환
+  //  */ getPostById: async (postId) => {
+  //   try {
+  //     const response = await AxiosInstance.get(`/api/forums/posts/${postId}`);
+  //     return response.data; // 서버 응답 데이터 반환
+  //   } catch (error) {
+  //     console.error("게시글 데이터 가져오기 중 오류 발생:", error);
+  //     throw error; // 오류 전달
+  //   }
+  // },
 
   /**
    * 댓글 추가

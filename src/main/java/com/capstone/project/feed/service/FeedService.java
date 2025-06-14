@@ -208,7 +208,7 @@ public class FeedService {
                             .mediaUrl(feed.getMediaUrl())
                             .comments(commentsWithReplies)
                             .isRepost(feed.isRepost())
-                            .profileImg(memberService.getMemberProfile(feed.getMemberId()).getProfileImg())
+                            .profilePictureUrl(memberService.getMemberProfile(feed.getMemberId()).getProfileImg())
                             .authorName(memberService.getMemberProfile(feed.getMemberId()).getName())
                             .liked(feedLikeRepository.existsByFeed_FeedIdAndMemberId(feed.getFeedId(), memberId))
                             .build();
@@ -238,7 +238,7 @@ public class FeedService {
         }
 
         MemberResponseDto memberResponse = memberService.getMemberProfile(feed.getMemberId());
-        String profileImg = memberResponse.getProfileImg();
+        String profilePictureUrl = memberResponse.getProfileImg();
         String authorName = memberResponse.getName();
 
         boolean liked = currentMemberId != null &&
@@ -261,7 +261,7 @@ public class FeedService {
                 .reposterId(feed.getReposterId())
                 .repostCreatedAt(feed.getRepostCreatedAt())
                 .mediaUrl(feed.getMediaUrl())
-                .profileImg(profileImg)
+                .profilePictureUrl(profilePictureUrl)
                 .originalPoster(originalPoster) // Original poster info if repost
                 .authorName(authorName)
                 .comments(commentsWithReplies)
@@ -285,9 +285,9 @@ public class FeedService {
      */
     private CommentResponseDto mapCommentWithReplies(FeedComment comment, Integer currentMemberId) {
         // 작성자 프로필 사진 및 이름 조회 (기본값 제공)
-        String profileImg = memberService.getMemberProfile(comment.getMemberId()).getProfileImg();
-        if (profileImg == null || profileImg.isEmpty()) {
-            profileImg = "https://example.com/default-profile-picture.jpg";
+        String profilePictureUrl = memberService.getMemberProfile(comment.getMemberId()).getProfileImg();
+        if (profilePictureUrl == null || profilePictureUrl.isEmpty()) {
+            profilePictureUrl = "https://example.com/default-profile-picture.jpg";
         }
         String memberName = memberService.getMemberProfile(comment.getMemberId()).getName();
 
@@ -310,7 +310,7 @@ public class FeedService {
                 .comment(comment.getComment())
                 .createdAt(comment.getCreatedAt())
                 .updatedAt(comment.getUpdatedAt())
-                .profileImg(profileImg)
+                .profilePictureUrl(profilePictureUrl)
                 .replies(replies)
                 .likesCount(likesCount)
                 .liked(liked)
@@ -329,7 +329,7 @@ public class FeedService {
             return MemberInfoDto.builder()
                     .memberId(memberResponse.getMemberId())
                     .name(memberResponse.getName())
-                    .profileImg(memberResponse.getProfileImg())
+                    .profilePictureUrl(memberResponse.getProfileImg())
                     .build();
         } catch (EntityNotFoundException e) {
             return null;

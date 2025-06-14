@@ -5,7 +5,9 @@ import imgLogo3 from "../images/SaveButton.png";
 import { useNavigate } from "react-router-dom";
 import EditableField from "../component/profileComponents/EditableField";
 import "../css/profile.css";
+import { LayoutContainer } from "./profile_style";
 import AxiosInstance from "../axios/AxiosInstanse";
+import { onAuthStateChanged } from "firebase/auth";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { auth, storage } from "../utils/FirebaseConfig";
 import { useProfile } from "./ProfileContext";
@@ -16,11 +18,11 @@ import FeedApi from "../api/FeedApi"; // KR: 친구 추천 데이터를 가져�
 import { getUserInfo } from "../axios/AxiosInstanse"; // 사용자 정보 가져오기
 import { ToastContainer, toast } from "react-toastify"; // Toastify
 
-const Profile = () => {
+const Profile = ({ darkMode }) => {
   // KR: 페이지 로드시 body 배경색 설정
-  useEffect(() => {
-    document.body.style.backgroundColor = "#f5f6f7";
-  }, []);
+  // useEffect(() => {
+  //   document.body.style.backgroundColor = "#f5f6f7";
+  // }, []);
 
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -37,7 +39,7 @@ const Profile = () => {
   // KR: 프로필 관련 로컬 상태 초기화
   const [profileInfo, setProfileInfo] = useState({
     memberId: "",
-    name: "User Name",
+    name: "유저 이름",
     email: "user@email.com",
     phone: "",
     location: "",
@@ -174,45 +176,6 @@ const Profile = () => {
     }
   };
 
-  // ---------------- 친구 추천 부분 ----------------
-  // KR: 기존에 하드코딩된 친구 목록 대신 빈 배열로 초기화
-  const [friendList, setFriendList] = useState([]);
-
-  // KR: 프로필 정보에서 memberId가 준비되면 서버에서 친구 추천 데이터를 동적으로 불러옴
-  useEffect(() => {
-    async function fetchFriends() {
-      try {
-        if (profileInfo.memberId) {
-          const suggestedFriends = await FeedApi.fetchSuggestedFriends(
-            profileInfo.memberId
-          );
-          setFriendList(suggestedFriends);
-        }
-      } catch (error) {
-        toast.error("❌ 친구 추천 불러오기 실패:", error);
-      }
-    }
-    fetchFriends();
-  }, [profileInfo.memberId]);
-
-  // KR: 친구 요청 버튼 클릭 시 상태 업데이트 함수
-  const handleSendRequest = (id) => {
-    setFriendList((prevList) =>
-      prevList.map((friend) =>
-        friend.memberId === id ? { ...friend, requestSent: true } : friend
-      )
-    );
-  };
-
-  // KR: 친구 요청 취소 버튼 클릭 시 상태 업데이트 함수
-  const handleCancelRequest = (id) => {
-    setFriendList((prevList) =>
-      prevList.map((friend) =>
-        friend.memberId === id ? { ...friend, requestSent: false } : friend
-      )
-    );
-  };
-
   // ======================================================================
   // KR: 로그인 상태 확인
   // 아래 useEffect는 현재 로그인한 사용자 정보를 가져와서, 유효한 사용자가 아니면 로그인 페이지로 리다이렉트합니다.
@@ -223,12 +186,13 @@ const Profile = () => {
         // KR: userInfo가 존재하고 memberId가 있는지 확인합니다.
         if (userInfo && userInfo.memberId) {
           setMemberId(userInfo.memberId);
-        } else {
-          toast.error("로그인이 필요합니다.");
-          setTimeout(() => {
-            navigate("/login");
-          }, 2500);
         }
+        // else {
+        //   toast.error("로그인이 필요합니다.");
+        //   setTimeout(() => {
+        //     navigate("/login");
+        //   }, 2500);
+        // }
       } catch (error) {
         console.error("사용자 정보를 가져오는 중 오류:", error);
         toast.error("사용자 정보를 확인할 수 없습니다.");
@@ -262,6 +226,14 @@ const Profile = () => {
 
   const confirmDelete = async () => {
     console.log(`회원 Id값 : ${profileInfo.memberId}`);
+    console.log(
+      "Retrieved memberData from localStorage:",
+      localStorage.getItem("memberData")
+    );
+    console.log(
+      "Parsed member data:",
+      JSON.parse(localStorage.getItem("memberData"))
+    );
     try {
       await AxiosInstance.delete(`/api/members/${profileInfo.memberId}`);
       alert("회원 탈퇴가 완료되었습니다.");
@@ -281,7 +253,7 @@ const Profile = () => {
 
   // ---------------- 프로필 화면 렌더링 ----------------
   return (
-    <div className="layout-container">
+    <LayoutContainer darkMode={darkMode}>
       {/* 좌측 섹션: 프로필 및 소개 */}
       <div className="profile-left">
         <div className="profile-image-container">
@@ -321,29 +293,29 @@ const Profile = () => {
           </div>
         </div>
 
-        <EditableField
+        {/* <EditableField
           content="email"
           value={profileInfo.email}
           isEditable={false}
-        />
+        /> */}
         <EditableField
           content="name"
           value={profileInfo.name}
           isEditable={true}
           onSave={(value) => updateProfileField("name", value)}
         />
-        <EditableField
+        {/* <EditableField
           content="location"
           value={profileInfo.location}
           isEditable={true}
           onSave={(value) => updateProfileField("location", value)}
-        />
-        <EditableField
+        /> */}
+        {/* <EditableField
           content="phone"
           value={profileInfo.phone}
           isEditable={true}
           onSave={(value) => updateProfileField("phone", value)}
-        />
+        /> */}
         <EditableField
           label="회원 소개"
           content="bio"
@@ -359,14 +331,6 @@ const Profile = () => {
           placeholder={placeholder.skills}
           isEditable={true}
           onSave={(value) => updateProfileField("skills", value)}
-        />
-        <EditableField
-          label="이력서"
-          content="resume"
-          value={profileInfo.resume}
-          placeholder={placeholder.resume}
-          isEditable={true}
-          onSave={(value) => updateProfileField("resume", value)}
         />
 
         {/* 회원 탈퇴 버튼 */}
@@ -385,53 +349,7 @@ const Profile = () => {
           정말 탈퇴하시겠습니까? 이 작업은 되돌릴 수 없습니다.
         </Modal03>
       </div>
-
-      {/* 우측 섹션: 친구 추천 */}
-      <div className="profile-right friends-section">
-        <h2>친구 추천</h2>
-        <ul className="friend-list">
-          {friendList.map((friend) => (
-            <li key={friend.memberId} className="friend-item">
-              <div className="friend-info">
-                <img
-                  src={friend.profileImg || imgLogo2}
-                  alt="친구 이미지"
-                  className="friend-image"
-                />
-                <div className="friend-details">
-                  <span>{friend.name}</span>
-                  <span className="friend-role">
-                    {friend.currentCompany || "미등록 회사"}
-                  </span>
-                </div>
-              </div>
-              <div className="friend-actions">
-                {!friend.isFriend && !friend.requestSent ? (
-                  <button
-                    className="friend-request-button"
-                    onClick={() => handleSendRequest(friend.memberId)}
-                  >
-                    친구 요청
-                  </button>
-                ) : friend.requestSent ? (
-                  <button
-                    className="friend-request-button"
-                    onClick={() => handleCancelRequest(friend.memberId)}
-                  >
-                    요청 취소
-                  </button>
-                ) : (
-                  <button className="friend-button disabled" disabled>
-                    친구
-                  </button>
-                )}
-                <button className="message-button">메시지</button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
+    </LayoutContainer>
   );
 };
 

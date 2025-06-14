@@ -6,6 +6,12 @@ import "../css/Mordal.css";
 import "../css/SignUp.css";
 import EmailVerification from "./kedu/course/component/EmailVerification";
 import Modal03 from "../component/Modal03";
+import { Container } from "../design/CommonDesign";
+import {
+  SignupContainer,
+  SubmitButton,
+  TermsBox,
+} from "../design/SignUpDesign";
 
 function SignUp() {
   const navigate = useNavigate();
@@ -13,6 +19,7 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
+  const [nickName, setNickName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [currentCompany, setCurrentCompany] = useState("");
   const [isAgreed, setIsAgreed] = useState(false);
@@ -22,6 +29,8 @@ function SignUp() {
   const [isPasswordMatch, setIsPasswordMatch] = useState(false);
   const [isVerified, setIsVerified] = useState(false); // 이메일 인증 완료 여부
   const [isNameFilled, setIsNameFilled] = useState(false);
+  const [isNickNameValid, setIsNickNameValid] = useState(false);
+  const [isNickNameAvailable, setIsNickNameAvailable] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [isWarningModalOpen, setIsWarningModalOpen] = useState(false);
   const [isPhoneNumberAvailable, setIsPhoneNumberAvailable] = useState(null); // 전화번호 중복 확인 (null = 미확인 상태)
@@ -32,6 +41,7 @@ function SignUp() {
       isVerified &&
       isPasswordMatch &&
       isNameFilled &&
+      isNickNameValid &&
       isEmailValid &&
       isEmailAvailable &&
       isAgreed
@@ -44,6 +54,7 @@ function SignUp() {
     isVerified,
     isPasswordMatch,
     isNameFilled,
+    isNickNameValid,
     isEmailValid,
     isEmailAvailable,
     isAgreed,
@@ -65,6 +76,11 @@ function SignUp() {
   const validatePassword = (password) => {
     const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
     return regex.test(password);
+  };
+
+  const validateNickName = (nickName) => {
+    const regex = /^.{3,10}$/;
+    return regex.test(nickName);
   };
 
   const handleEmailChange = async (e) => {
@@ -103,6 +119,26 @@ function SignUp() {
     const nameValue = e.target.value;
     setName(nameValue);
     setIsNameFilled(nameValue.trim().length > 0); // 이름이 비어 있지 않으면 true
+  };
+
+  const handleNickNameChange = async (e) => {
+    const nickNameValue = e.target.value;
+    setNickName(nickNameValue);
+
+    if (nickNameValue && validateNickName(nickNameValue)) {
+      setIsNickNameValid(true);
+      try {
+        const response = await AxiosInstance.post("/auth/check-nickname", {
+          nickName: nickNameValue,
+        });
+        setIsNickNameAvailable(response.data.isAvailable);
+      } catch (error) {
+        setIsNickNameAvailable(false);
+      }
+    } else {
+      setIsNickNameValid(false);
+      setIsNickNameAvailable(false);
+    }
   };
 
   const handlePhoneNumberChange = async (e) => {
@@ -153,12 +189,18 @@ function SignUp() {
       return;
     }
 
+    if (!isNickNameValid) {
+      alert("닉네임 조건을 만족하지 않습니다.");
+      return;
+    }
+
     try {
       const sanitizedPhoneNumber = phoneNumber.replace(/-/g, "");
       const response = await AxiosInstance.post("/auth/signup", {
         email,
         password,
         name,
+        nickName,
         phoneNumber: sanitizedPhoneNumber,
         currentCompany,
         showCompany: true,
@@ -176,12 +218,11 @@ function SignUp() {
 
   return (
     <>
-      <div className="signup-container">
-        <div className="signup-box">
-          <h2>회원가입</h2>
+      <Container className="center font_color">
+        <SignupContainer>
           <form onSubmit={handleSubmit}>
             <div>
-              <label>이메일</label>
+              <label>EMAIL</label>
               <input
                 type="email"
                 value={email}
@@ -214,13 +255,13 @@ function SignUp() {
               )}
             </div>
             <div>
-              <label>비밀번호</label>
+              <label>PW</label>
               <input
                 type="password"
                 value={password}
                 onChange={handlePasswordChange}
                 required
-                placeholder="8자리 이상, 특수문자 포함"
+                placeholder="비밀번호를 입력하세요. (8자리 이상, 특수문자와 숫자 포함)"
               />
               <br />
               {password && (
@@ -234,12 +275,13 @@ function SignUp() {
               )}
             </div>
             <div>
-              <label>비밀번호 확인</label>
+              <label>PW CHECK</label>
               <input
                 type="password"
                 value={confirmPassword}
                 onChange={handleConfirmPasswordChange}
                 required
+                placeholder="비밀번호를 한 번 더 입력하세요."
               />
               <br />
               {confirmPassword && (
@@ -253,22 +295,52 @@ function SignUp() {
               )}
             </div>
             <div>
-              <label>이름</label>
+              <label>NAME</label>
               <input
                 type="text"
                 value={name}
+                placeholder="이름을 입력하세요."
                 onChange={handleNameChange}
                 required
               />
             </div>
             <div>
-              <label>전화번호</label>
+              <label>NICKNAME</label>
+              <input
+                type="text"
+                value={nickName}
+                onChange={handleNickNameChange}
+                required
+                placeholder="닉네임을 입력하세요."
+              />
+              <br />
+              {nickName && !isNickNameValid && (
+                <span className="message error">
+                  ❌ 닉네임은 3자리 이상 10자리 이하여야 합니다.
+                </span>
+              )}
+
+              {nickName && isNickNameValid && (
+                <span
+                  className={`message ${
+                    isNickNameAvailable ? "success" : "error"
+                  }`}
+                >
+                  {isNickNameAvailable
+                    ? "✅ 사용 가능한 닉네임입니다."
+                    : "❌ 이미 사용중인 닉네임입니다."}
+                </span>
+              )}
+            </div>
+            <div>
+              <label>PHONE</label>
               <input
                 type="tel"
                 value={phoneNumber}
                 onChange={handlePhoneNumberChange}
-                placeholder="010-1234-5678"
+                placeholder="전화번호를 입력하세요 (-(하이픈) 제외 13자리"
               />
+              <br />
               {phoneNumber && (
                 <span
                   className={`message ${
@@ -281,19 +353,7 @@ function SignUp() {
                 </span>
               )}
             </div>
-            <div>
-              <label>현재 회사</label>
-              <input
-                type="text"
-                value={currentCompany}
-                onChange={(e) => setCurrentCompany(e.target.value)}
-                placeholder="재직 중인 회사가 없다면 공란으로 비워주세요."
-              />
-            </div>
-            <div className="terms-checkbox">
-              <button type="button" onClick={handleOpenModal}>
-                <h3>회원가입 약관 (자세히보기)</h3>
-              </button>
+            <TermsBox>
               <label>
                 약관 동의
                 <input
@@ -302,13 +362,16 @@ function SignUp() {
                   onChange={() => setIsAgreed(!isAgreed)}
                 />
               </label>
-            </div>
-            <button id="signup-btn" type="submit" disabled>
+              <button type="button" onClick={handleOpenModal}>
+                <span>회원가입 약관 (자세히보기)</span>
+              </button>
+            </TermsBox>
+            <SubmitButton id="signup-btn" type="submit">
               회원가입
-            </button>
+            </SubmitButton>
           </form>
-        </div>
-      </div>
+        </SignupContainer>
+      </Container>
       <TermsOfServiceModal
         isOpen={showModal}
         onClose={() => setShowModal(false)}

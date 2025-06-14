@@ -25,7 +25,7 @@ const NaverCallback = () => {
         Common.setAccessToken(accessToken);
         Common.setRefreshToken(refreshToken);
         loggedIn();
-        navigate("/feed");
+        // navigate("/feed");
       } catch (err) {
         console.error("네이버 로그인 실패:", err);
         alert("네이버 로그인에 실패했습니다. 다시 시도해주세요.");
