@@ -45,10 +45,18 @@
 > ### 클라우드 스토리지
 > Firebase Storage
 > ### 머신러닝
-> 언어 및 환경: Python(PyCharm 사용)
-> 주요 라이브러리: scikit-learn, TensorFlow, Pandas 등
+> 언어 및 환경: Python(PyCharm 사용)</br>
+> 주요 라이브러리 및 프레임워크:</br>
+> •	데이터 처리: numpy, pandas, tqdm</br>
+> •	시각화: matplotlib, seaborn</br>
+> •	머신러닝 & 딥러닝: scikit-learn, tensorflow, torch (PyTorch), mxnet, gluonnlp</br>
+> •	자연어 처리(NLP): transformers, sentencepiece</br>
+> •	웹 크롤링 & 자동화: selenium, webdriver-manager, yfinance</br>
+> •	웹 서버: flask</br>
+> •	스케줄링: apscheduler</br>
+> •	검색엔진 연동: elasticsearch
 > ### 검색엔진
-> Elasticsearch
+> Elasticsearch(Python 연동 포함)
 > ### IDE
 > IntelliJ, Visual Studio Code, PyCharm
 > ### 협업 도구
