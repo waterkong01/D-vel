@@ -44,8 +44,13 @@
 > 관리 도구: DBeaver
 > ### 클라우드 스토리지
 > Firebase Storage
+> ### 머신러닝
+> 언어 및 환경: Python(PyCharm 사용)
+> 주요 라이브러리: scikit-learn, TensorFlow, Pandas 등
+> ### 검색엔진
+> Elasticsearch
 > ### IDE
-> IntelliJ, Visual Studio Code
+> IntelliJ, Visual Studio Code, PyCharm
 > ### 협업 도구
 > Github(소스 공유), Notion(프로젝트 기록), Figma(화면 설계 및 디자인), Google Sheets(WBS), draw.io(DB설계)
 
