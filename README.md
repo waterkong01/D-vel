@@ -27,9 +27,9 @@
 >
 > 주요 기능: 
 >
-> 발표 자료(PDF): 
+> 발표 자료(PDF): https://drive.google.com/file/d/11GaVdIQWBR-ftCB8UZGwDZpQ2XxdnwLU/view?usp=sharing
 >
-> 더 많은 프로젝트 정보(Notion): 
+> 더 많은 프로젝트 정보(Notion): https://www.notion.so/D-vel-1998c659c95f8096bffae55e65832e0a?source=copy_link
 
 
 ## **⚒️ 기술 및 환경**
