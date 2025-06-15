@@ -29,8 +29,7 @@
 >
 > 발표 자료(PDF): https://drive.google.com/file/d/11GaVdIQWBR-ftCB8UZGwDZpQ2XxdnwLU/view?usp=sharing
 >
-> 더 많은 프로젝트 정보(Notion): https://www.notion.so/D-vel-1998c659c95f8096bffae55e65832e0a?source=copy_link
-> https://wheat-composer-cac.notion.site/D-vel-1998c659c95f8096bffae55e65832e0a
+> 더 많은 프로젝트 정보(Notion): https://wheat-composer-cac.notion.site/D-vel-1998c659c95f8096bffae55e65832e0a
 
 
 ## **⚒️ 기술 및 환경**
