@@ -25,13 +25,14 @@ const FeedList = ({memberId}) => {
     const [profileImg, setProfileImg] = useState(imgLogo2);
     const [loggedInUser, setLoggedInUser] = useState(null);
 
-    // KR: 수정 모드 상태
+    // 수정 모드 상태
     const [editingFeedId, setEditingFeedId] = useState(null);
     const [editingFeedContent, setEditingFeedContent] = useState("");
     const [posts, setPosts] = useState([]);
 
     const FEED_ICON_URL = [
-        "https://firebasestorage.googleapis.com/v0/b/d-vel-b334f.firebasestorage.app/o/firebase%2Fprofile%2Fclose%201.png?alt=media&",  // close
+        "https://firebasestorage.googleapis.com/v0/b/d-vel-b334f.firebasestorage.app/o/firebase%2Fprofile%2Ftrash%201.png?alt=media&", // trash
+        // "https://firebasestorage.googleapis.com/v0/b/d-vel-b334f.firebasestorage.app/o/firebase%2Fprofile%2Fclose%201.png?alt=media&",  // close
         "https://firebasestorage.googleapis.com/v0/b/d-vel-b334f.firebasestorage.app/o/firebase%2Fprofile%2Fedit-text%201.png?alt=media&",  // edit
     ]
 
@@ -188,7 +189,6 @@ const FeedList = ({memberId}) => {
                               <span>{feed.content}</span>
                           )}
                       </FeedMid>
-
                       <FeedBottom>
                           {editingFeedId === feed.feedId ? (
                               <FeedBottom>

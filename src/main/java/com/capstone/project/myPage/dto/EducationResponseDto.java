@@ -16,6 +16,7 @@ public class EducationResponseDto {
     private String degree;
     private LocalDate startDate;
     private LocalDate endDate;
+    private Integer mypageId;
 
     // Constructor
     public EducationResponseDto(Education education) {
@@ -24,6 +25,6 @@ public class EducationResponseDto {
         this.degree = education.getDegree();
         this.startDate = education.getStartDate();
         this.endDate = education.getEndDate();
+        this.mypageId = education.getMypage().getMypageId();
     }
-
 }

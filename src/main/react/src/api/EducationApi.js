@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // const PROFILE_API_URL = "http://localhost:8111/api/mypage";
-const KH_DOMAIN = "";
+const KH_DOMAIN = "http://localhost:8111";
 
 // 프로필 관련 API(학력)
 const EducationApi = {

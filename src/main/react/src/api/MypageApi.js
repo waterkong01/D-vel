@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const KH_DOMAIN = "";
+const KH_DOMAIN = "http://localhost:8111";
 
 // 프로필 관련 API(프로필)
 const MypageApi = {

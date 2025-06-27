@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"; // 페이지 이동을 위한 �
 import styled from "styled-components";
 import { AuthContext } from "../../api/context/AuthContext";
 import { ModalContent, ModalTextLink } from "./BeforeLoginModal";
+import Common from "../../utils/Common";
 
 export const ModalOverlay = styled.div`
   position: fixed;
@@ -161,6 +162,22 @@ const AfterLoginModal = ({
 }) => {
   const { isLoggedIn, logout } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [mypageId, setMypageId] = useState(null); // 추가
+
+  useEffect(() => {
+    // 현재 로그인한 사용자 ID 받아오기
+    const fetchLoggedInUser = async () => {
+      try {
+        const response = await Common.getTokenByMemberId();
+        const memberId = response.data;
+        setMypageId(memberId);
+      } catch (error) {
+        console.error("로그인 정보 가져오기 실패:", error);
+      }
+    };
+
+    fetchLoggedInUser();
+  }, []);
 
   const handleLogout = () => {
     if (isLoggedIn) {
@@ -173,9 +190,10 @@ const AfterLoginModal = ({
   };
 
   const handleMyPage = () => {
-    navigate("/profile/mypage");
+    navigate(`/mypage/${mypageId}`);
     closeModal();
   };
+
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 

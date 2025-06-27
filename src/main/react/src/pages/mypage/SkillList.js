@@ -58,7 +58,10 @@ const SkillList = ({ mypageId }) => {
       const addedSkill = await SkillApi.createSkill(mypageId, skill);
       setSkills([...skills, addedSkill]);
       setNewSkill("");
-      setIsAddingSkill(false);
+
+      if (!isEditing) {
+        setIsAddingSkill(false);
+      }
     } catch (error) {
       console.error("스킬 추가 중 오류 발생:", error);
     }
@@ -90,7 +93,24 @@ const SkillList = ({ mypageId }) => {
       <EduHeader>
         <h3>SKILL</h3>
         {isOwner && (
-            <ChattingIcon src={SKILL_ICON_URL[2]} onClick={() => setIsEditing(!isEditing)}/>
+/*            <>
+              <ChattingIcon src={SKILL_ICON_URL[2]} onClick={() => setIsEditing(!isEditing)}/>
+              {isEditing && (
+                  <ChattingIcon src={SKILL_ICON_URL[1]} onClick={() => setIsAddingSkill(!isAddingSkill)} />
+              )}
+            </>*/
+            <>
+              <ChattingIcon
+                  src={SKILL_ICON_URL[2]} // 연필 아이콘
+                  onClick={() => {
+                    setIsEditing((prev) => {
+                      const next = !prev;
+                      setIsAddingSkill(next); // edit 열면 바로 입력창도 열고, 닫으면 같이 닫기
+                      return next;
+                    });
+                  }}
+              />
+            </>
         )}
       </EduHeader>
 
