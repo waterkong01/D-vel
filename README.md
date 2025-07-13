@@ -25,7 +25,7 @@
 >
 > 구현 기간: 2025.02.20 ~ 2025.03.18
 >
-> 주요 기능: 
+> 주요 기능: 회원가입 및 로그인, 1:1 채팅, 게시글(피드), 머신러닝과 엘라스틱서치를 이용한 뉴스/트렌드 기능, 마이페이지
 >
 > 발표 자료(PDF): https://drive.google.com/file/d/11GaVdIQWBR-ftCB8UZGwDZpQ2XxdnwLU/view?usp=sharing
 >
