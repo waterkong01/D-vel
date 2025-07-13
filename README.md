@@ -60,7 +60,7 @@
 > ### IDE
 > IntelliJ, Visual Studio Code, PyCharm
 > ### 협업 도구
-> Github(소스 공유), Notion(프로젝트 기록), Figma(화면 설계 및 디자인), Google Sheets(WBS), draw.io(DB설계)
+> Github(소스 공유), Notion(프로젝트 기록), Figma(화면 설계 및 디자인), Google Sheets(WBS)
 
 ## **📃 작품 배경 및 소개**
 > ### 작품 배경
